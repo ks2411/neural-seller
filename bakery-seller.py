@@ -8,7 +8,14 @@
 !pip install --upgrade httpx
 
 """
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+app=Flask(__name__) 
 
+@app.route("/", methods=["get","post"])
+def reply():
+text=request.form.get("Body")
+response=MessagingResponse()
 #@title Определим класс для подсветки вывода разных моделей разными цветами
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 class bcolors:
@@ -1395,7 +1402,7 @@ main_answer = ''
 summarized_dialog = ''
 
 while True:
-    client_question = input("")
+    client_question = text
     history_user.append(client_question)
     history_chat.append(f"Клиент: {client_question}")
     if len(history_user) == 1: hello_word = sufler(history_user)  # запомнили приветствие
@@ -1412,10 +1419,14 @@ while True:
 
     history_chat.append(f"Менеджер: {without_hello}")
     history_manager.append(without_hello) # не будем Василия хранить в истории, чтобы не путать gpt лишними именами
+response.message(main_answer)
 
+return str( response)
 # Запуск сохранения
 """from datetime import datetime
 text_file = f'dialog_{datetime.now().strftime("%d.%m.%Y_%H.%M.%S")}.txt'
 with open(text_file, "w") as f:
     f.write(str('\n\n'.join(history_chat)))
 """
+if __name__=="__main__":#запуск только при прямом запуске
+      app.run()
