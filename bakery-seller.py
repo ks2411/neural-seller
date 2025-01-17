@@ -1349,12 +1349,24 @@ def get_seller_answer(history_user, history_manager, history_chat):
 import getpass
 
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-openai.api_key = os.environ["OPENAI_API_KEY"]
+openai.api_key = "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"
+
 
 # @title Загружаем Базу Знаний, индексируем, сохраняем индексы
 
+from pathlib import Path
 
-with open (r"C:\bakery_bot\shop_catalog.txt", "r", encoding="utf-8") as f:
+# Определяем путь к текущему скрипту
+current_dir = Path(__file__).parent
+
+# Определяем путь к файлу shop_catalog.txt
+file_path = current_dir / 'shop_catalog.txt'
+
+# Открываем и читаем файл с указанием кодировки
+with file_path.open('r', encoding='utf-8') as f:
+   
+
+
     knowledge_db_txt = f.read()
 
 # Разбиваем на чанки
