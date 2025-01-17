@@ -1,1 +1,2 @@
-web: gunicorn app:app --log-file=-
+web: gunicorn bakery_seller:app --log-file=-
+
