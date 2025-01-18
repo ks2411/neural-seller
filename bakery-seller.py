@@ -1352,11 +1352,11 @@ def get_seller_answer(history_user, history_manager, history_chat):
 """# Подгружаем ключ API, Базу знаний
 
 """
+import os
 
+openai_api_key = os.getenv("OPENAI_API_KEY")
 import getpass
 
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-openai.api_key = "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"
 
 
 # @title Загружаем Базу Знаний, индексируем, сохраняем индексы
